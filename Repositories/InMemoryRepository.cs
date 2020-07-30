@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Entities;
 using Repositories.Interfaces;
 
@@ -21,13 +22,23 @@ namespace Repositories
             };
         }
 
-        public List<Genre> GetAllGenres()
+        public void AddGenre(Genre genre)
         {
+            genre.Id = _genres.Max(g => g.Id)+1;
+            _genres.Add(genre);
+        }
+
+        public async Task<List<Genre>> GetAllGenres()
+        {
+
+            await Task.Delay(1);// Will remove this later when data will be fetched from DB
             return _genres;
         }
 
-        public Genre GetGenre(int id)
+        public async Task<Genre> GetGenre(int id)
         {
+
+            await Task.Delay(1);// Will remove this later when data will be fetched from DB
             return _genres.FirstOrDefault(g => g.Id == id);
         }
     }
